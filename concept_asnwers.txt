@@ -1,0 +1,25 @@
+Question 1 (5 pts):
+In the OpenGL Shading Language (GLSL), what is a uniform variable? What is an "in" variable? What is an "out" variable? How does a vertex shader pass data to a fragment shader?
+
+A uniform variable is a variable that is constant accross all instances of a shader program (unlinke ins/out variables, which are different accross instances). A uniform variable will not change between multiple executions of a shader during rendering. In and out variables define what variables are respectively inputs and outputs to the shader, and can change between multiple executions of a shader during rendering. The output (out) of the vertex shader is passed as the input to the fragment shader (in) with the in/out variable declarations that share the same name.
+
+
+Question 2 (5 pts):
+The SurfaceShader class has several member variables of type int, such as attrPos and unifModel. What do these variables represent? How are they given values in the first place?
+
+int attrPos; // A handle for the "in" vec4 representing vertex position in the vertex shader
+int attrNor; // A handle for the "in" vec4 representing vertex normal in the vertex shader
+int attrUV; // A handle for the "in" vec2 representing the UV coordinates in the vertex shader
+int unifModel; // A handle for the "uniform" mat4 representing model matrix in the vertex shader
+int unifModelInvTr; // A handle for the "uniform" mat4 representing inverse transpose of the model matrix in the vertex shader
+int unifView; // A handle for the "uniform" mat4 representing the view matrix in the vertex shader
+int unifProj; // A handle for the "uniform" mat4 representing the projection matrix in the vertex shader
+
+SurfaceShader has a virtual function called setupMemberVars() that give values to these shader specific handles. In this case of the SurfaceShader, glGetAttribLocation and glGetUniformLocation help set up the program member varialbes as follows:
+
+glGetAttribLocation(GLuint program, const GLchar *name) queries the previously linked program object specified by program for the attribute variable specified by name and returns the index of the generic vertex attribute that is bound to that attribute variable. 
+glGetUniformLocation(GLuint program, const GLchar *name) returns an integer that represents the location of a specific uniform variable within a program object.
+
+Additionally, the functions setModelMatrix(const glm::mat4 &model) and setViewProjMatrix(const glm::mat4 &v, const glm::mat4 &p) // Pass the given model matrix (setModelMatrix) or the projection * view matrix (setViewProjMatrix) to this shader on the GPU. This is accomplished with the convenience function: glUniformMatrix3fv(location, count, transpose, value).
+
+Each shader derived class can define these variables for itself on the CPU such that the the GPU can track these "objects" with a unique ID.

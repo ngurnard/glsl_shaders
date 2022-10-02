@@ -1,0 +1,22 @@
+----------------------------------------------------------------------
+QUESTION AND ANSWERS ONLINE
+----------------------------------------------------------------------
+
+Question1:
+I was confused on the openGL lectues in class, so I watched a lot of the videos
+made by the following guy so that I can get a better understanding of what I am
+actually working with:
+Answer (Oct 2, 14:00)
+https://www.youtube.com/watch?v=OR4fNpBjmq8&list=PLlrATfBNZ98foTJPJ_Ev03o2oq3-GGOS2&index=2&ab_channel=TheCherno
+
+Question2:
+What is glGetAttribLocation()?
+Answer (Oct 2, 15:59)
+glGetAttribLocation queries the previously linked program object specified by program for the attribute variable specified by name and returns the index of the generic vertex attribute that is bound to that attribute variable. If name is a matrix attribute variable, the index of the first column of the matrix is returned. If the named attribute variable is not an active attribute in the specified program object or if name starts with the reserved prefix "gl_", a value of -1 is returned.
+https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGetAttribLocation.xhtml
+
+
+
+----------------------------------------------------------------------
+COLLABORATORS
+----------------------------------------------------------------------
