@@ -11,32 +11,125 @@ Mesh::Mesh(OpenGLContext *context)
 void Mesh::createCube(const char *textureFile, const char *bgTextureFile)
 {
     // Code that sets up texture data on the GPU
-    mp_texture = std::unique_ptr<Texture>(new Texture(context));
-    mp_texture->create(textureFile);
+    // Think of a context as an object that holds all of OpenGL; when a context is destroyed, OpenGL is destroyed.
+    mp_texture = std::unique_ptr<Texture>(new Texture(context)); // makes a pointer to the OpenGL "object"
+    mp_texture->create(textureFile); // creates the texture
 
     mp_bgTexture = std::unique_ptr<Texture>(new Texture(context));
-    mp_bgTexture->create(bgTextureFile);
+    mp_bgTexture->create(bgTextureFile); // creates the texture
 
     // TODO: Create VBO data for positions, normals, UVs, and indices
 
-    std::vector<glm::vec4> pos {glm::vec4(-2, -2, 0, 1),
-                                glm::vec4(2, -2, 0, 1),
-                                glm::vec4(2, 2, 0, 1),
-                                glm::vec4(-2, 2, 0, 1)};
+    /* REFERENCE CODE */
+    std::vector<glm::vec4> pos {
+                                // Front face
+                                glm::vec4(-1, -1, 1, 1), // bot left
+                                glm::vec4(1, -1, 1, 1), // bot right
+                                glm::vec4(1, 1, 1, 1), // top right
+                                glm::vec4(-1, 1, 1, 1), // top left
+                                // Back Face
+                                glm::vec4(-1, -1, -1, 1), // bot left
+                                glm::vec4(1, -1, -1, 1), // bot right
+                                glm::vec4(1, 1, -1, 1), // top right
+                                glm::vec4(-1, 1, -1, 1), // top left
+                                // Left Face
+                                glm::vec4(-1, -1, -1, 1), // bot left
+                                glm::vec4(-1, -1, 1, 1), // bot right
+                                glm::vec4(-1, 1, 1, 1), // top right
+                                glm::vec4(-1, 1, -1, 1), // top left
+                                // Right Face
+                                glm::vec4(1, -1, 1, 1), // bot left
+                                glm::vec4(1, -1, -1, 1), // bot right
+                                glm::vec4(1, 1, -1, 1), // top right
+                                glm::vec4(1, 1, 1, 1), // top left
+                                // Top Face
+                                glm::vec4(-1, 1, 1, 1), // bot left
+                                glm::vec4(1, 1, 1, 1), // bot right
+                                glm::vec4(1, 1, -1, 1), // top right
+                                glm::vec4(-1, 1, -1, 1), // top left
+                                // Bot Face
+                                glm::vec4(-1, -1, 1, 1), // bot left
+                                glm::vec4(1, -1, 1, 1), // bot right
+                                glm::vec4(1, -1, -1, 1), // top right
+                                glm::vec4(-1, -1, -1, 1) // top left
+                                };
 
-    std::vector<glm::vec4> nor {glm::vec4(0, 0, 1, 0),
+    std::vector<glm::vec4> nor {
+                                // Front Face
                                 glm::vec4(0, 0, 1, 0),
                                 glm::vec4(0, 0, 1, 0),
-                                glm::vec4(0, 0, 1, 0)};
+                                glm::vec4(0, 0, 1, 0),
+                                glm::vec4(0, 0, 1, 0),
+                                // Back Face
+                                glm::vec4(0, 0, -1, 0),
+                                glm::vec4(0, 0, -1, 0),
+                                glm::vec4(0, 0, -1, 0),
+                                glm::vec4(0, 0, -1, 0),
+                                //Left Face
+                                glm::vec4(-1, 0, 0, 0),
+                                glm::vec4(-1, 0, 0, 0),
+                                glm::vec4(-1, 0, 0, 0),
+                                glm::vec4(-1, 0, 0, 0),
+                                // Right Face
+                                glm::vec4(1, 0, 0, 0),
+                                glm::vec4(1, 0, 0, 0),
+                                glm::vec4(1, 0, 0, 0),
+                                glm::vec4(1, 0, 0, 0),
+                                // Top Face
+                                glm::vec4(0, 1, 0, 0),
+                                glm::vec4(0, 1, 0, 0),
+                                glm::vec4(0, 1, 0, 0),
+                                glm::vec4(0, 1, 0, 0),
+                                // Bot Face
+                                glm::vec4(0, -1, 0, 0),
+                                glm::vec4(0, -1, 0, 0),
+                                glm::vec4(0, -1, 0, 0),
+                                glm::vec4(0, -1, 0, 0),
+                                };
 
-    std::vector<glm::vec2> uvs {glm::vec2(0, 0),
+    std::vector<glm::vec2> uvs {
+                                // Front Face
+                                glm::vec2(0, 0),
                                 glm::vec2(1, 0),
                                 glm::vec2(1, 1),
-                                glm::vec2(0, 1)};
+                                glm::vec2(0, 1),
+                                // Back Face
+                                glm::vec2(0, 0),
+                                glm::vec2(1, 0),
+                                glm::vec2(1, 1),
+                                glm::vec2(0, 1),
+                                // Left Face
+                                glm::vec2(0, 0),
+                                glm::vec2(1, 0),
+                                glm::vec2(1, 1),
+                                glm::vec2(0, 1),
+                                // Right Face
+                                glm::vec2(0, 0),
+                                glm::vec2(1, 0),
+                                glm::vec2(1, 1),
+                                glm::vec2(0, 1),
+                                // Top Face
+                                glm::vec2(0, 0),
+                                glm::vec2(1, 0),
+                                glm::vec2(1, 1),
+                                glm::vec2(0, 1),
+                                // Bot Face
+                                glm::vec2(0, 0),
+                                glm::vec2(1, 0),
+                                glm::vec2(1, 1),
+                                glm::vec2(0, 1),
+                                };
 
-    std::vector<GLuint> idx {0, 1, 2, 0, 2, 3};
+    std::vector<GLuint> idx {
+                            0, 1, 2, 0, 2, 3, // front face
+                            4, 5, 6, 4, 6, 7, // back face
+                            8, 9, 10, 8, 10, 11, // left face
+                            12, 13, 14, 12, 14, 15, // right face
+                            16, 17, 18, 16, 18, 19, // top face
+                            20, 21, 22, 20, 22, 23 // bot face
+                            };
 
-    count = 6; // TODO: Set "count" to the number of indices in your index VBO
+    count = 36; // TODO: Set "count" to the number of indices in your index VBO
 
     generateIdx();
     context->glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, bufIdx);

@@ -22,5 +22,31 @@ layout(location = 0) out vec3 out_Col;//This is the final output color that you 
 void main()
 {
     // TODO Homework 4
-    out_Col = vec3(0, 0, 0);
+    // ----------------------------------------------------
+    // Blinn-Phong Shading
+    // ----------------------------------------------------
+    vec4 lightDir = normalize(fs_LightVec - fs_Pos); // vector from the fragment's world-space position to the light source (assuming a point light source)
+    vec4 viewDir = normalize(fs_CameraPos - fs_Pos); // vector from the fragment's world-space position to the camera
+    vec4 halfVec = normalize(lightDir + viewDir); // vector halfway between light source and view direction
+//    vec4 halfVec = (lightDir + viewDir)/2; // vector halfway between light source and view direction
+    float shininess = 75;
+    float specularIntensity = max(pow(dot(halfVec, normalize(fs_Nor)), shininess), 0);
+
+    // ----------------------------------------------------
+    // Lambert Shading
+    // ----------------------------------------------------
+    // Material base color (before shading)
+    vec4 diffuseColor = texture(u_Texture, fs_UV);
+    // Calculate the diffuse term for Lambert shading
+    float diffuseTerm = dot(normalize(fs_Nor), normalize(fs_LightVec));
+    // Avoid negative lighting values
+    diffuseTerm = clamp(diffuseTerm, 0, 1);
+    float ambientTerm = 0.2;
+    float lightIntensity = diffuseTerm + ambientTerm;   //Add a small float value to the color multiplier
+                                                        //to simulate ambient lighting. This ensures that faces that are not
+                                                        //lit by our point light are not completely black.
+    // Compute final shaded color
+    out_Col = vec3(diffuseColor.rgb * lightIntensity + diffuseColor.rgb * specularIntensity);
+//    out_Col = normalize(abs(fs_Nor));
+
 }

@@ -32,6 +32,8 @@ out vec2 fs_UV;             // The UV of each vertex. This is implicitly passed 
 out vec4 fs_CameraPos;
 out vec4 fs_Pos;
 
+uniform vec3 u_CamPos;
+
 void main()
 {
     // TODO Homework 4
@@ -46,7 +48,8 @@ void main()
 
     vec4 modelposition = u_Model * vs_Pos;   // Temporarily store the transformed vertex positions for use below
 
-    fs_CameraPos = inverse(u_View) * vec4(0,0,0,1);
+//    fs_CameraPos = inverse(u_View) * vec4(0,0,0,1); // inverse is expensive!
+    fs_CameraPos = vec4(u_CamPos, 1); // uniform handle for the camera position instead of the inverse
 
     fs_Pos = modelposition;
 

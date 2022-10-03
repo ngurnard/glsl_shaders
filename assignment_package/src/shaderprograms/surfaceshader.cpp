@@ -24,6 +24,8 @@ void SurfaceShader::setupMemberVars()
     unifSampler2D  = context->glGetUniformLocation(prog, "u_Texture");
     unifTime = context->glGetUniformLocation(prog, "u_Time");
 
+    unifCamPos = context->glGetUniformLocation(prog, "u_CamPos"); // define what we call the cam pos
+
     context->printGLErrorLog();
 }
 
@@ -128,5 +130,19 @@ void SurfaceShader::setViewProjMatrix(const glm::mat4 &v, const glm::mat4 &p)
                        GL_FALSE,
                     // Pointer to the first element of the matrix
                        &p[0][0]);
+    }
+}
+
+void SurfaceShader::setCamPos(const glm::vec3 &eye)
+{
+    useMe();
+
+    if (unifCamPos != -1) {
+        // Pass a vector into a uniform variable in our shader handle to the vec variable on the GPU
+        context->glUniform3fv(unifCamPos,
+                            // How many vectors to pass
+                               1,
+                            // Pointer to the first element of the vector
+                               &eye[0]);
     }
 }
