@@ -45,6 +45,15 @@ Formula to get from 2D coords to 1D coords?
 Answer (Oct 3, 20:57)
 https://stackoverflow.com/questions/1730961/convert-a-2d-array-index-into-a-1d-index
 
+Question8:
+I had some struggles getting creative withe the custom noise based post processed shader. I took inspiration from
+many sources on shadertoy, I have linked many below
+Answer (Oct 4, 10:16)
+https://www.shadertoy.com/view/MtlyR8
+https://www.shadertoy.com/view/Xd23Dh
+https://www.shadertoy.com/view/ldl3W8
+
+
 ----------------------------------------------------------------------
 COLLABORATORS
 ----------------------------------------------------------------------
