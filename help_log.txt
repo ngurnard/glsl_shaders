@@ -27,6 +27,23 @@ Answer (Oct 2, 22:25)
 https://learnopengl.com/Advanced-Lighting/Advanced-Lighting
 https://emunix.emich.edu/~mevett/GraphicsCourse/Labs/MattsLab5Lighting/index.html
 
+Question5:
+Is there a built in distance function in GLSL?
+Answer (Oct 3, 19:28)
+https://stackoverflow.com/questions/38112526/why-do-people-use-sqrtdotdistancevector-distancevector-over-opengls-distan
+
+Question6:
+How to I use texelFetch()?
+Answer (Oct 3, 20:16)
+https://computergraphics.stackexchange.com/questions/7687/how-to-use-glsl-texelfetch
+https://registry.khronos.org/OpenGL-Refpages/gl4/html/texelFetch.xhtml
+https://stackoverflow.com/questions/45613310/switching-from-texture-to-texelfetch
+https://stackoverflow.com/questions/45034150/trying-to-get-data-from-neighbour-fragments-with-texelfetch-in-glsl
+
+Question7:
+Formula to get from 2D coords to 1D coords?
+Answer (Oct 3, 20:57)
+https://stackoverflow.com/questions/1730961/convert-a-2d-array-index-into-a-1d-index
 
 ----------------------------------------------------------------------
 COLLABORATORS
