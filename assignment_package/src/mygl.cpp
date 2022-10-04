@@ -224,6 +224,10 @@ void MyGL::createShaders()
     worley->create(":/glsl/post/passthrough.vert.glsl", ":/glsl/post/worleywarp.frag.glsl");
     m_postprocessShaders.push_back(worley);
 
+    std::shared_ptr<PostProcessShader> rgb_sep = std::make_shared<PostProcessShader>(this);
+    rgb_sep->create(":/glsl/post/passthrough.vert.glsl", ":/glsl/post/rgb_separation.frag.glsl");
+    m_postprocessShaders.push_back(rgb_sep);
+
     slot_setCurrentPostprocessShaderProgram(0);
     mp_progPostprocessNoOp = m_postprocessShaders[0].get();
 

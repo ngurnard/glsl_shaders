@@ -17,5 +17,6 @@
         <file>glsl/surface/deform.frag.glsl</file>
         <file>glsl/surface/deform.vert.glsl</file>
         <file>glsl/post/worleywarp.frag.glsl</file>
+        <file>glsl/post/rgb_separation.frag.glsl</file>
     </qresource>
 </RCC>
